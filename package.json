@@ -1,0 +1,24 @@
+{
+  "name": "neo2mqtt",
+  "version": "0.9.0",
+  "description": "Bridge between MQTT and Neo Smart Controller for Blinds",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mqtt",
+    "neo",
+    "iot",
+    "bridge"
+  ],
+  "author": "Jonathan Gilbert",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^3.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "winston": "^3.2.1",
+    "yargs": "^14.2.0"
+  }
+}

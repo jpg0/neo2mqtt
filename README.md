@@ -14,11 +14,9 @@ Topic:
 `/cmnd/blinds/neo/<controller ip address>/<controller id (get from the phone app)>/<blind or room id (get from the phone app)`
 Message body:
 - `up` : blinds move UP
-- `dn` : blinds move DOWN
-- `sp` : blinds STOP moving
-- `gp` : go to favorite position
-- `mu` : micro step up
-- `md` : micro step down
+- `down` : blinds move DOWN
+- `stop` : blinds STOP moving
+- `fav` : go to favorite position
 
 Message will be echoed at:
 `/cmnd/blinds/neo/<controller ip address>/<controller id (get from the phone app)>/<blind or room id (get from the phone app)`

@@ -45,9 +45,20 @@ const neoController = function (ip, controller_id) {
     return {
         //returns a promise
         send: function (roomOrBlindCode, operation) {
-            return request(buildUrl(roomOrBlindCode, operation));
+            var url = buildUrl(roomOrBlindCode, operation);
+            logger.debug("Sending command to Neo: " + url);
+            return request(url);
         }
     }
+}
+
+const cmdToNeoStr = function (cmd) {
+    return {
+        "up": "up",
+        "down": "dn",
+        "stop": "sp",
+        "fav": "gp"
+    }[cmd.toString().toLowerCase()];
 }
 
 const runMqtt2Neo = function (mqttClient, neo) {
@@ -55,12 +66,14 @@ const runMqtt2Neo = function (mqttClient, neo) {
 
     mqttClient.on('message', function (topic, message) {
 
-        var [_,_,_,_,controller_ip, controller_id, blind_or_group_id] = topic.split("/");
+        var cmd = cmdToNeoStr(message);
+
+        var [_, _, _, _, controller_ip, controller_id, blind_or_group_id] = topic.split("/");
 
         var controller = neoController(controller_ip, controller_id);
 
-        controller.send(blind_or_group_id, message).then( _ => {
-            mqttClient.publish(`${MQTT_STATE_TOPIC}/${controller_ip}/${controller_id}/${blind_or_group_id}` , message);
+        controller.send(blind_or_group_id, cmd).then(_ => {
+            mqttClient.publish(`${MQTT_STATE_TOPIC}/${controller_ip}/${controller_id}/${blind_or_group_id}`, message);
         }).error(e => {
             logger.error("Failed to send command to to neo: %v", error);
         });

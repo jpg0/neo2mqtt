@@ -15,7 +15,7 @@
   "author": "Jonathan Gilbert",
   "license": "ISC",
   "dependencies": {
-    "mqtt": "^3.0.0",
+    "mqtt": "^4.3.7",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "winston": "^3.2.1",
